@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>内部服务器错误 - 百通e箱冷链容器租赁平台</title>
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="target-densitydpi=device-dpi,width=1350,user-scalable=no" />
+	<meta http-equiv="Cache-Control" content="no-siteapp" />
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="lib/layui/css/layui.css">
+	<link rel="stylesheet" href="css/myset.css">
+    <!--[if lt IE 9]>
+        <script src="js/html5.min.js"></script>
+        <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        body {
+            text-align: center;
+        }
+
+        body .ico {
+            display: inline-block;
+            margin-top: 50px;
+        }
+        .ico i{
+            line-height: 200px; font-size: 200px; color: #393D50;
+        }
+
+        .tip {
+            font-size: 30px;
+            color: #393D50;
+            margin: 38px 0;
+            margin-bottom: 38px;
+            
+        }
+        .shop-footer{
+            position: absolute;
+            bottom: 0;
+            display: block;
+            width: 100%;
+        }
+    </style>
+
+</head>
+
+<body>
+    <!-- 这里是header部分，可以提取出来复用 -->
+    <div class="my-nav-header">
+        <div class="layui-container">
+            <div class="layui-col-xs4 layui-col-sm4 layui-col-md4 logo-area">
+                <a href="index.html">
+                    <!-- 百通冷链运营平台 -->
+                    <img src="images/logo.png" height="56px;" style="margin-bottom: 2px;" />
+                </a>
+            </div>
+            <ul class="my-nav layui-nav layui-bg-green layui-col-xs8 layui-col-sm8 layui-col-md8" lay-filter="">
+                <li class="layui-nav-item">
+                    <a href="index.html">租箱首页</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="network.html">网点查询</a>
+                </li>
+                <li class="layui-nav-item hide" id="admin">
+                    <a href="admin.html">平台管理</a>
+                </li>
+                <li class="layui-nav-item hide" id="user">
+                    <a href="javascript:;">liweifeng</a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="admin.html">我的订单</a>
+                        </dd>
+                        <dd>
+                            <a href="">退出登录</a>
+                        </dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item hide" id="login">
+                    <a href="javascript:;" class="tologin">点击这里
+                        <b>登录</b>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- header完 -->
+
+    
+    <div class="ico">
+        <i class="layui-icon">&#xe636;</i>
+    </div>
+    <div class="tip">内部服务器错误！</div>
+    <div class="btn-container">
+        <a class="layui-btn my-gr-btn" id="goback">返回上页</a>
+        <a href="index.html" class="layui-btn layui-btn-danger">返回首页</a>
+    </div>
+    <!-- 以下是页面脚部 -->
+    <div class="shop-footer">
+        <p>Copyright &copy; 2017 - 2018 百通e箱冷链容器租赁平台 All Rights Reserved</p>
+        <p>
+            <a href="index.html">租箱首页</a>&ensp;|&ensp;
+            <a href="network.html">网点查询</a>&ensp;|&ensp;
+            <a href="admin.html">平台管理</a>
+        </p>
+        <p>
+            <a href="">粤ICP备：1801010001号</a>
+        </p>
+    </div>
+    <!-- 脚部完 -->
+
+    <script type="text/javascript" src="./js/jquery-1.12.4.min.js"></script>
+    <script src="./lib/layui/layui.js" charset="utf-8"></script>
+    <script src="js/islogin.js"></script>
+    <script>
+        $(function () {
+            layui.use('form', function () {
+                var form = layui.form;
+
+                form.on('submit(login)', function (data) {
+
+                    layer.msg(JSON.stringify(data.field), function () {
+                        location.href = 'admin.html'
+                    });
+                    return false;
+                });
+            });
+        })
+        $(document).ready(function(){
+            $('#goback').click(function(){
+                // window.history.back;
+                window.history.go(-1);
+            });
+        });
+
+    </script>
+
+
+</body>
+
+</html>

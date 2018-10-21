@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>交易结算 - 百通e箱冷链容器租赁平台</title>
+	<meta name="renderer" content="webkit|ie-comp|ie-stand">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="target-densitydpi=device-dpi,width=1350,user-scalable=no" />
+	<meta http-equiv="Cache-Control" content="no-siteapp" />
+	<!-- <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" /> -->
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="lib/layui/css/layui.css">
+	<link rel="stylesheet" href="css/myset.css">
+	<link rel="stylesheet" href="css/purchase.css">
+	<!--[if lt IE 9]>
+	    <script src="js/html5.min.js"></script>
+	    <script src="js/respond.min.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+	<!-- 这里是header部分，可以提取出来复用 -->
+	<div class="my-nav-header">
+		<div class="layui-container">
+			<div class="layui-col-xs4 layui-col-sm4 layui-col-md4 logo-area">
+				<a href="index.html">
+					<!-- 百通冷链运营平台 -->
+					<img src="images/logo.png" />
+				</a>
+			</div>
+			<ul class="my-nav layui-nav layui-bg-green layui-col-xs8 layui-col-sm8 layui-col-md8" lay-filter="">
+				<li class="layui-nav-item">
+					<a href="index.html">租箱首页</a>
+				</li>
+				<li class="layui-nav-item">
+					<a href="network.html">网点查询</a>
+				</li>
+				<li class="layui-nav-item hide" id="admin">
+					<a href="admin.html">平台管理</a>
+				</li>
+				<li class="layui-nav-item hide" id="user">
+					<a href="javascript:;">liweifeng</a>
+					<dl class="layui-nav-child">
+						<dd>
+							<a href="admin.html">我的订单</a>
+						</dd>
+						<dd>
+							<a href="">退出登录</a>
+						</dd>
+					</dl>
+				</li>
+				<li class="layui-nav-item hide" id="login">
+					<a href="javascript:;" class="tologin">点击这里
+						<b>登录</b>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<!-- header完 -->
+
+	<div class="my-main">
+
+
+		<div class="layui-container">
+			<div class="my-address">
+				<h2>
+					<i class="layui-icon my-nav-ico">&#xe715;</i> 中国关心下一代委员会</h2>
+				<p>
+					<label>收&ensp;货&ensp;人：</label>
+					<span>李韦锋</span>
+					<span>18520546151</span>
+				</p>
+				<p>
+					<label>收货地址：</label>
+					<span>广东省广州市天河区珠江新城0010号C栋10010室</span>
+				</p>
+				<div>
+					<a onclick="showModal('编辑当前地址','components/addressedit.html','470','440')">编辑当前地址</a>
+					<a id="choose" >选择其它地址</a>
+					<!-- onclick="showModal('选择其它地址','components/chooseaddress.html','680','')" -->
+				</div>
+			</div>
+			<div class="my-box-list">
+				<div class="title-bar">租赁方式：
+					<span>次租</span>
+				</div>
+				<div class="my-box layui-row">
+					<div class="layui-col-xs2 layui-col-sm2 layui-col-md2">
+						<img src="images/box.jpg" width="80px" height="60px" style="margin: 10px" />
+					</div>
+					<div class="layui-col-xs10 layui-col-sm10 layui-col-md10">
+						<div class="layui-col-xs4 layui-col-sm4 layui-col-md4">智能冷链箱60L</div>
+						<div class="layui-col-xs4 layui-col-sm4 layui-col-md4">60L</div>
+						<div class="layui-col-xs4 layui-col-sm4 layui-col-md4">A型号</div>
+						<div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+							<span>数量：</span>10个</div>
+						<div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+							<span>单价：</span>
+							<b style="color: #f40;">100元</b>/天</div>
+					</div>
+				</div>
+				<div class="my-box layui-row">
+					<div class="layui-col-xs2 layui-col-sm2 layui-col-md2">
+						<img src="images/box.jpg" width="80px" height="60px" style="margin: 10px" />
+					</div>
+					<div class="layui-col-xs10 layui-col-sm10 layui-col-md10">
+						<div class="layui-col-xs4 layui-col-sm4 layui-col-md4">智能冷链箱60L</div>
+						<div class="layui-col-xs4 layui-col-sm4 layui-col-md4">60L</div>
+						<div class="layui-col-xs4 layui-col-sm4 layui-col-md4">A型号</div>
+						<div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+							<span>数量：</span>10个</div>
+						<div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+							<span>单价：</span>
+							<b style="color: #f40;">100元</b>/天</div>
+					</div>
+				</div>
+				<div class="my-box layui-row">
+					<div class="layui-col-xs2 layui-col-sm2 layui-col-md2">
+						<img src="images/box.jpg" width="80px" height="60px" style="margin: 10px" />
+					</div>
+					<div class="layui-col-xs10 layui-col-sm10 layui-col-md10">
+						<div class="layui-col-xs4 layui-col-sm4 layui-col-md4">智能冷链箱60L</div>
+						<div class="layui-col-xs4 layui-col-sm4 layui-col-md4">60L</div>
+						<div class="layui-col-xs4 layui-col-sm4 layui-col-md4">A型号</div>
+						<div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+							<span>数量：</span>10个</div>
+						<div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+							<span>单价：</span>
+							<b style="color: #f40;">100元</b>/天</div>
+					</div>
+				</div>
+			</div>
+			<ul class="price-detail">
+				<li class="days">
+					<label>租赁天数</label>
+					<div class="layui-btn-group">
+						<button class="layui-btn layui-btn-primary layui-btn-xs" id="minus">
+							<i class="layui-icon">-</i>
+						</button>
+						<button class="layui-btn layui-btn-primary layui-btn-xs">
+							<i class="layui-icon" id="count">1</i>
+						</button>
+						<button class="layui-btn layui-btn-primary layui-btn-xs" id="add">
+							<i class="layui-icon">+</i>
+						</button>
+					</div>
+
+				</li>
+				<li class="insurance">
+
+					<div class="layui-form" action="">
+
+						<!--  <div class="layui-form-item"> -->
+						<label>保险费用</label>
+						<div id="test11" style="display: inline-block;">
+							<input type="radio" name="insurance" value="1" title="100元购买" checked>
+							<input type="radio" name="insurance" value="0" title="不购买" >
+						</div>
+						<!-- </div> -->
+
+
+					</div>
+				</li>
+				<li class="">
+					<label>配送费：</label>100元</li>
+				<li class="">
+					<label>押金：</label>1000元</li>
+				<li class="">
+					<label>留言：</label>
+					<input class="leave-message" type="text"></input>
+				</li>
+				<li>
+					<label>总计费用：</label>
+					<b style="color:#f40;">2000元</b>
+					<a class="layui-btn layui-btn-danger" id="topay">确认付款</a>
+				</li>
+
+			</ul>
+		</div>
+
+		<script type="text/javascript" src="./js/jquery-1.12.4.min.js"></script>
+		<script src="lib/layui/layui.js" charset="utf-8"></script>
+		<script type="text/javascript" src="./js/function.js"></script>
+		<script src="js/islogin.js"></script>
+		<script>
+			
+			$('#test11').click(function(){
+				console.log($('.insurance input[name="insurance"]:checked').val());
+			});
+			
+			layui.use('element', function () {
+				var element = layui.element;
+
+				//…
+			});
+			layui.use('form', function () {
+				var form = layui.form;
+
+
+			});
+			var count = $('#count').text();
+			// console.log(count);
+			$('#minus').click(function () {
+				if (count > 0) count--;
+				$('#count').text(count);
+			});
+			$('#add').click(function () {
+				count++;
+				$('#count').text(count);
+			});
+
+			layui.use('layer', function () {
+				var layer = layui.layer;
+
+
+			});
+			$('#topay').click(function () {
+				layer.open({
+					type: 1,
+					"title": "扫码支付还能领红包",
+					area: ['250px', '285px'],
+					content: '<img src="images/pay.jpg" style="margin-left:10px;" />'
+				});
+			});
+
+			layui.use('layer', function () {
+				var layer = layui.layer;
+				$('#choose').click(function () {
+					var h=($(window).height()-50)+'px';
+					//showModal('用户登录','components/shoplogin.html','460','296');
+					var login = layer.open({
+						type: 2,
+						content: 'components/chooseaddress.html',
+						area: ['680px', h],
+						title: "选择其它地址",
+						btn: ['确认', '取消']
+						, yes: function (index, layero) {
+							layer.msg("你已经选择了其它地址!");
+						}
+						, btn2: function (index, layero) {
+							layer.msg("你取消了操作");
+
+							//return false 开启该代码可禁止点击该按钮关闭
+						}
+					});
+				});
+			});
+
+		</script>
+
+
+
+</body>
+
+</html>

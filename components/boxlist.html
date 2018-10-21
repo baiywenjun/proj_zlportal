@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>箱体回收 - 百通e箱冷链容器租赁平台</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+  <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="../css/font.css">
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/myset.css">
+  <link rel="stylesheet" href="../css/normalize.css">
+  <link rel="stylesheet" href="../css/xadmin.css">
+  <link rel="stylesheet" href="../css/orderlist.css">
+  <!--[if lt IE 9]>
+          <script src="../js/html5.min.js"></script>
+          <script src="../js/respond.min.js"></script>
+        <![endif]-->
+  <style type="text/css">
+      .goods .layui-form-checkbox{
+        margin-top: 10px;
+      }
+  </style>
+</head>
+
+<body>
+  <div class="x-nav">
+    <span>当前位置：</span>
+    <span class="layui-breadcrumb">
+      <a href="">后台首页</a>
+      <a href="">基本功能</a>
+      <a href="javascript:location.replace(location.href);">
+        <cite>箱体回收</cite>
+      </a>
+    </span>
+  </div>
+  <div class="x-body">
+    <div class="order-list">
+      <div class="layui-tab layui-tab-brief">
+        <ul class="layui-tab-title">
+          <li class="layui-this">待回收</li>
+          <li>已申请</li>
+          <li>已回收</li>
+        </ul>
+        <div class="search">
+
+          <form class="layui-form" action="">
+            <div class="layui-row layui-col-space5">
+              <div class="layui-col-xs2 layui-col-sm2 layui-col-md2">
+                <div class="layui-form-item">
+                  <div class="layui-input-inline">
+                    <button class="layui-btn layui-btn-sm layui-btn-danger" lay-submit lay-filter="return">回收选中</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+
+        </div>
+        <div class="layui-tab-content">
+          <div class="layui-tab-item layui-show">
+            <div class="orders" id="orderlist">
+              <div class="order" v-for="(item,index) in items">
+                <div class="title layui-row">
+                  <p class="layui-col-xs2 layui-col-sm2 layui-col-md2 layui-form">
+                    <input type="checkbox" lay-skin="primary"> 订单编号：{{item.no}}
+                  </p>
+                  <p class="layui-col-xs3 layui-col-sm3 layui-col-md3">下单时间：{{item.order_time}}</p>
+                  <p class="layui-col-xs2 layui-col-sm2 layui-col-md2">租赁方式：{{item.lease_type}}</p>
+                  <p class="layui-col-xs3 layui-col-sm3 layui-col-md3">订单总金额：
+                    <b style="color: #f40;">{{item.price}}</b> 元</p>
+                  <p class="layui-col-xs2 layui-col-sm2 layui-col-md2">
+                    <b style="color: #f40;">{{item.status}}</b>
+                    <button class="layui-btn layui-btn-xs layui-btn-danger" id="topay" @click="recycle(index)">申请回收</button>
+                  </p>
+
+                </div>
+                <div class="layui-row goods" v-for="goods in item.content">
+                  <div class="layui-col-xs1 layui-col-sm1 layui-col-md1">
+                    <div class="layui-col-xs1 layui-col-sm1 layui-col-md1 layui-form sub-check">
+                      <input type="checkbox" lay-skin="primary">
+                    </div>
+                    <div class="layui-col-xs11 layui-col-sm11 layui-col-md11">
+                      <img v-bind:src="goods.img" />
+                    </div>
+                  </div>
+                  <div class="layui-col-xs11 layui-col-sm11 layui-col-md11 box-summary">
+
+                    <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+                      <p>{{goods.name}}</p>
+                      <p>
+                        <b>{{goods.type}}</b>型号&ensp;
+                        <b>{{goods.capacity}}</b>L</p>
+                      </p>
+                    </div>
+                    <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+                      <p>{{goods.unit_price}}</p>
+                      <p>共计 {{goods.count}} 个</p>
+                      </p>
+                    </div>
+                    <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+                      <p class="total">共计
+                        <b>{{goods.total_price}}</b> 元</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="desc layui-row">
+                  <span>订单备注：</span>{{item.desc}}</div>
+              </div>
+            </div>
+          </div>
+          <div class="layui-tab-item">2</div>
+          <div class="layui-tab-item">3</div>
+        </div>
+      </div>
+
+
+      <div id="pages"></div>
+    </div>
+
+
+  </div>
+
+  <script type="text/javascript" src="../js/jquery-1.12.4.min.js"></script>
+  <script type="text/javascript" src="../lib/layui/layui.js" charset="utf-8"></script>
+  <script type="text/javascript" src="../js/xadmin.js"></script>
+  <script type="text/javascript" src="../js/function.js"></script>
+  <script src="../lib/vue.min.js"></script>
+  <script>
+    layui.use('laypage', function () {
+      var laypage = layui.laypage;
+
+      //执行一个laypage实例
+      laypage.render({
+        elem: 'pages'
+        , count: 50 //数据总数，从服务端得到
+      });
+    });
+  </script>
+  <script type="text/javascript">   
+    var vm = new Vue({
+      el: '#orderlist',
+      data: {
+        items: [
+          {
+            "no": "12313131",
+            "order_time": "2017-11-21 16:35:17",
+            "lease_type": "日租",
+            "days": 10,
+            "status": "未回收",
+            "content": [{
+              "name": "智能冷链箱",
+              "img": "../images/box.jpg",
+              "url": "#",
+              "capacity": 60,
+              "unit_price": "100 元/天",
+              "count": 10,
+              "type": "B",
+              "color": "蓝色",
+              "total_price": 10000
+            }],
+            "price": 100000,
+            "desc": "楼下的狗得了癌症，只想临死之前吃到新鲜的火星冷荔枝。这个星球上只有百通冷链可以做到了，拜托了，为了素不相识的那只狗！"
+          }, {
+            "no": "22313131",
+            "order_time": "2017-11-21 16:35:17",
+            "lease_type": "月租",
+            "status": "待付款",
+            "days": 3,
+            "content": [
+              {
+                "name": "智能冷链箱",
+                "img": "../images/box.jpg",
+                "url": "#",
+                "capacity": 90,
+                "unit_price": "4000 元/月",
+                "count": 3,
+                "type": "A",
+                "color": "蓝色",
+                "total_price": 12000
+              }, {
+                "name": "智能冷链箱",
+                "img": "../images/box.jpg",
+                "url": "#",
+                "capacity": 60,
+                "unit_price": "2500 元/月",
+                "count": 10,
+                "type": "C",
+                "color": "蓝色",
+                "total_price": 25000
+              }, {
+                "name": "智能冷链箱",
+                "img": "../images/box.jpg",
+                "url": "#",
+                "capacity": 120,
+                "unit_price": "5000 元/月",
+                "count": 2,
+                "type": "官方套餐一",
+                "color": "蓝色",
+                "total_price": 10000
+              }
+            ],
+            "price": 141000,
+            "desc": "楼下的狗得了癌症，只想临死之前吃到新鲜的火星冷荔枝。这个星球上只有百通冷链可以做到了，拜托了，为了素不相识的那只狗！"
+          }, {
+            "no": "22313131",
+            "order_time": "2017-11-21 16:35:17",
+            "lease_type": "月租",
+            "status": "待付款",
+            "days": 3,
+            "content": [
+              {
+                "name": "智能冷链箱",
+                "img": "../images/box.jpg",
+                "url": "#",
+                "capacity": 90,
+                "unit_price": "4000 元/月",
+                "count": 3,
+                "type": "A",
+                "color": "蓝色",
+                "total_price": 12000
+              }, {
+                "name": "智能冷链箱",
+                "img": "../images/box.jpg",
+                "url": "#",
+                "capacity": 60,
+                "unit_price": "2500 元/月",
+                "count": 10,
+                "type": "C",
+                "color": "蓝色",
+                "total_price": 25000
+              }, {
+                "name": "智能冷链箱",
+                "img": "../images/box.jpg",
+                "url": "#",
+                "capacity": 120,
+                "unit_price": "5000 元/月",
+                "count": 2,
+                "type": "官方套餐一",
+                "color": "蓝色",
+                "total_price": 10000
+              }
+            ],
+            "price": 141000,
+            "desc": "楼下的狗得了癌症，只想临死之前吃到新鲜的火星冷荔枝。这个星球上只有百通冷链可以做到了，拜托了，为了素不相识的那只狗！"
+          }
+
+        ]
+      },
+      methods:{
+        "recycle":function(index){
+          console.log(index);
+          showModal('回收箱体','recycle.html','780','320',index);
+        }
+      }
+    });
+  </script>
+
+
+
+
+</body>
+
+</html>

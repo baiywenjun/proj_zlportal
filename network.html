@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>网点查询 - 百通e箱冷链容器租赁平台</title>
+	<meta name="renderer" content="webkit|ie-comp|ie-stand">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="target-densitydpi=device-dpi,width=1350,user-scalable=no" />
+	<meta http-equiv="Cache-Control" content="no-siteapp" />
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="lib/layui/css/layui.css">
+	<link rel="stylesheet" href="css/myset.css">
+	<link rel="stylesheet" href="css/network.css">
+	<!--[if lt IE 9]>
+	    <script src="js/html5.min.js"></script>
+	    <script src="js/respond.min.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+	<!-- 这里是header部分，可以提取出来复用 -->
+	<div class="my-nav-header">
+		<div class="layui-container">
+			<div class="layui-col-xs4 layui-col-sm4 layui-col-md4 logo-area">
+				<a href="index.html">
+					<!-- 百通冷链运营平台 -->
+					<img src="images/logo.png" />
+				</a>
+			</div>
+			<ul class="my-nav layui-nav layui-bg-green layui-col-xs8 layui-col-sm8 layui-col-md8" lay-filter="">
+				<li class="layui-nav-item">
+					<a href="index.html">租箱首页</a>
+				</li>
+				<li class="layui-nav-item layui-this">
+					<a href="network.html">网点查询</a>
+				</li>
+				<li class="layui-nav-item hide" id="admin">
+					<a href="admin.html">平台管理</a>
+				</li>
+				<li class="layui-nav-item hide" id="user">
+					<a href="javascript:;">liweifeng</a>
+					<dl class="layui-nav-child">
+						<dd>
+							<a href="admin.html">我的订单</a>
+						</dd>
+						<dd>
+							<a href="">退出登录</a>
+						</dd>
+					</dl>
+				</li>
+				<li class="layui-nav-item hide" id="login">
+					<a href="javascript:;" class="tologin">点击这里
+						<b>登录</b>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<!-- header完 -->
+	<div class="my-main">
+		<div class="layui-container">
+			<div class="my-filter">
+
+				<form class="layui-form" action="">
+
+					<div class="layui-row" style="margin-bottom: 0px;">
+						<div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+							<div class="layui-form-item">
+								<div class="layui-inline">
+									<label class="layui-form-label">网点名称</label>
+									<div class="layui-input-inline">
+										<input type="text" autocomplete="off" class="layui-input">
+									</div>
+
+								</div>
+							</div>
+						</div>
+						<div class="layui-col-xs6 layui-col-sm6 layui-col-md6">
+							<div class="layui-form-item">
+								<label class="layui-form-label">地区</label>
+								<div class="layui-input-inline">
+									<select name="launchstatus" lay-verify="required">
+										<option value="0">广州市天河区</option>
+										<option value="1">珠海市香洲区</option>
+										<option value="2">深圳市南山区</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="layui-col-xs2 layui-col-sm2 layui-col-md2">
+							<div class="layui-form-item">
+								<div class="layui-input-inline">
+									<button style="float: right;" class="layui-btn my-gr-btn" lay-submit lay-filter="search">查询</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+
+			</div>
+			<div id="map"></div>
+		</div>
+	</div>
+
+	<!-- 以下是页面脚部 -->
+	<div class="shop-footer">
+		<p>Copyright &copy; 2017 - 2018 百通e箱冷链容器租赁平台 All Rights Reserved</p>
+		<p>
+			<a href="">租箱首页</a>&ensp;|&ensp;
+			<a href="">网点查询</a>&ensp;|&ensp;
+			<a href="">平台管理</a>
+		</p>
+		<p>
+			<a href="">粤ICP备：1801010001号</a>
+		</p>
+	</div>
+	<!-- 脚部完 -->
+
+
+	<script type="text/javascript" src="./js/jquery-1.12.4.min.js"></script>
+	<script src="./lib/layui/layui.js" charset="utf-8"></script>
+	<script type="text/javascript" src="./js/function.js"></script>
+	<script src="js/islogin.js"></script>
+
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=c8c1URc2lIvGUVOGVMzxmgaoGpFkCsBp"></script>
+	<script type="text/javascript">  
+		var mp = new BMap.Map("map");
+		mp.centerAndZoom(new BMap.Point(113.15, 23.6), 11);
+
+	</script>
+	<script>
+
+		layui.use('element', function () {
+			var element = layui.element;
+		});
+		layui.use('form', function () {
+			var form = layui.form;
+
+
+		});
+
+	</script>
+	<script type="text/javascript">
+		// $(document).ready(function(){
+		// 	console.log($(document).height());
+		// 	$("#map").css({"height":$(document).height()-310});
+		// 	$(window).resize(function(){
+		// 		$("#map").css({"height":$(document).height()-310});
+		// 	});
+		// });
+	</script>
+
+</body>
+
+</html>
